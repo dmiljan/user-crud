@@ -9,7 +9,11 @@
 			{{ textBtn }}
 		</button>
 		<Search @searchUser="searchUser" />
-		<UserForm ref="userForm" @add-user="addUser" @update-user="updateUser" />
+		<UserForm
+			ref="userForm"
+			@add-user="addUser"
+			@update-user="updateUser"
+		/>
 		<Users
 			:users="users"
 			@edit-user="showEditForm"
@@ -30,7 +34,7 @@ export default {
 	components: {
 		Users,
 		UserForm,
-		Search
+		Search,
 	},
 	data() {
 		return {
@@ -44,12 +48,11 @@ export default {
 	},
 
 	methods: {
-        loadUsers() {
-            axios.get("http://localhost:5000/getAll")
-            .then((response) => {
-                this.users = response.data;
-            });
-        },
+		loadUsers() {
+			axios.get("http://localhost:5000/getAll").then((response) => {
+				this.users = response.data;
+			});
+		},
 		addUser(user) {
 			axios
 				.post("http://localhost:5000/insert", {
@@ -68,34 +71,36 @@ export default {
 				});
 		},
 		updateUser(user) {
-			axios.patch("http://localhost:5000/update", {
-				id: user.id,
-				name: user.name,
-				title: user.title,
-			})
-            .then((response) => {
+			axios
+				.patch("http://localhost:5000/update", {
+					id: user.id,
+					name: user.name,
+					title: user.title,
+				})
+				.then((response) => {
 					this.loadUsers();
 				});
 		},
 		searchUser(name) {
-            if(name == ''){
-                this.loadUsers();
-            } else {
-                axios.get(`http://localhost:5000/search/${name}`)
-				.then((response) => {
-					this.users = response.data;
-				});
-            }
+			if (name == "") {
+				this.loadUsers();
+			} else {
+				axios
+					.get(`http://localhost:5000/search/${name}`)
+					.then((response) => {
+						this.users = response.data;
+					});
+			}
 		},
-        showEditForm(user){
-            this.$refs.userForm.showUpdateForm(user);
-        },
+		showEditForm(user) {
+			this.$refs.userForm.showUpdateForm(user);
+		},
 		showCreateForm() {
-            if(this.$refs.userForm.show){
-                this.$refs.userForm.closeForm();
-            } else {
-                this.$refs.userForm.showCreateForm();
-            }
+			if (this.$refs.userForm.show) {
+				this.$refs.userForm.closeForm();
+			} else {
+				this.$refs.userForm.showCreateForm();
+			}
 
 			if (this.$refs.userForm.show) {
 				this.textBtn = "Close";
