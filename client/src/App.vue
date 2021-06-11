@@ -56,7 +56,9 @@ export default {
 					name: user.name,
 					title: user.title,
 				})
-				.then(this.loadUsers());
+				.then((response) => {
+					this.loadUsers();
+				});
 		},
 		deleteUser(id) {
 			axios
@@ -71,7 +73,9 @@ export default {
 				name: user.name,
 				title: user.title,
 			})
-            .then(this.loadUsers());
+            .then((response) => {
+					this.loadUsers();
+				});
 		},
 		searchUser(name) {
             if(name == ''){
