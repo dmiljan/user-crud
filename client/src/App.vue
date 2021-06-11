@@ -22,7 +22,6 @@
 import Users from "./components/Users";
 import UserForm from "./components/UserForm.vue";
 import Search from "./components/Search";
-import AddUser from "./components/AddUser";
 
 import axios from "axios";
 
@@ -31,8 +30,7 @@ export default {
 	components: {
 		Users,
 		UserForm,
-		Search,
-		AddUser,
+		Search
 	},
 	data() {
 		return {
