@@ -49,9 +49,11 @@ export default {
 
 	methods: {
 		loadUsers() {
-			axios.get("http://localhost:5000/getAll").then((response) => {
-				this.users = response.data;
-			});
+			axios
+				.get("http://localhost:5000/getAll")
+				.then((response) => {
+					this.users = response.data;
+				});
 		},
 		addUser(user) {
 			axios
